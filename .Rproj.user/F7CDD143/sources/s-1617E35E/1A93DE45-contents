@@ -1,0 +1,6 @@
+library(stringr)
+fontawesome:::fa_tbl |>
+  filter(str_detect(full_name, "house")) |>
+  print(n=Inf)
+
+fontawesome:::fa_version

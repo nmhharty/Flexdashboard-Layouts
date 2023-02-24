@@ -1,0 +1,124 @@
+---
+title: "RFA #40624 Equity Analysis"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+params: 
+  AppsThroughMonth: "2023-01-31"
+  AppsCurrentMonth: "Jan 2023"
+  Internal: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(dplyr)
+library(kableExtra)
+library(maps)
+library(fontawesome)
+library(flexdashboard)
+library(leaflet)
+library(tigris)
+library(shiny)
+# Install thematic and un-comment for themed static plots (i.e., ggplot2)
+# thematic::thematic_rmd()
+
+
+```
+
+# Applications Awarded
+
+## Row
+
+### Applications Awarded in **`r params$AppsCurrentMonth`** {.value-box}
+
+```{r}
+valueBox(5, 
+  icon = "fa-check")
+
+```
+
+### Dollar Amount Awarded in **`r params$AppsCurrentMonth`** {.value-box}
+
+```{r}
+valueBox(scales::dollar(123456),
+  icon = "fa-money-bill")
+```
+
+### Dollar Amount Awarded under HDG **`r params$AppsCurrentMonth`**  
+```{r}
+valueBox(scales::dollar((123456-25000)),
+  icon = "fa-users")
+```
+
+### Dollar Amount Awarded under IMM **`r params$AppsCurrentMonth`**  
+```{r}
+valueBox(scales::dollar((25000)),
+  icon = "fa-syringe")
+```
+
+
+## Row 
+
+### Applications Awarded **to Date** {.value-box}
+
+```{r}
+valueBox(15, 
+  icon = "fa-check-double")
+
+```
+
+### Dollar Amount Awarded **to Date** {.value-box}
+
+```{r}
+valueBox(scales::dollar(1234567),
+  icon = "fa-money-bill")
+```
+
+### Dollar Amount Awarded under HDG **to Date**  
+```{r}
+valueBox(scales::dollar((1234567-500000)),
+  icon = "fa-users")
+```
+
+
+### Dollar Amount Awarded under IMM **to Date**  
+```{r}
+valueBox(scales::dollar((1234567-500000)),
+  icon = "fa-syringe")
+```
+
+## Row
+
+### Table 1
+
+```{r}
+mtcars |>
+  select(mpg, cyl) |>
+  group_by(cyl) |>
+  summarise(AvgMPG = mean(mpg)) |>
+  kbl() |>
+  kable_styling(bootstrap_options = c("striped", "hover")) 
+```
+
+### Table 2
+
+```{r}
+mtcars |>
+  select(mpg, cyl) |>
+  group_by(cyl) |>
+  summarise(AvgMPG = mean(mpg)) |>
+  kbl() |>
+  kable_styling(bootstrap_options = c("striped", "hover")) 
+```
+
+### Table 3
+
+```{r}
+mtcars |>
+  select(mpg, cyl) |>
+  group_by(cyl) |>
+  summarise(AvgMPG = mean(mpg)) |>
+  kbl() |>
+  kable_styling(bootstrap_options = c("striped", "hover")) 
+```
+
